@@ -8,7 +8,7 @@ import fs from "fs";
 dotenv.config({ path: fs.existsSync("./.env") ? "./.env" : "../.env" });
 
 const app: Application = express();
-app.use(express.json()); // For parsing JSON bodies
+app.use(express.json()); // For    parsing JSON bodies
 
 // Routes
 app.use("/api/users", userRoutes);
