@@ -1,0 +1,32 @@
+name: deploy to main repository
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions: write-all
+
+jobs:
+  build-and-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository with submodules
+        uses: actions/checkout@v3
+        with:
+          repository: farhad-rad/doc-digest
+          submodules: true
+          token: ${{ secrets.PAT_TOKEN }}
+          ref: main
+
+      - name: Update submodules
+        run: |
+          git submodule update --remote
+          git config user.name "farhad-rad"
+          git config user.email "farhad.rad.official@gmail.com"
+          git add .
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "Automatic update from client\server application with stable changes in main branch of each"
+            git push origin main
+          fi
