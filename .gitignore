@@ -34,5 +34,4 @@ npm-debug.log
 .env
 
 .vscode/*
-
 dist/*
