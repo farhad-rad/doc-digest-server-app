@@ -14,7 +14,7 @@ gulp.task("clear", function () {
       })
       .pipe(clean());
   }
-  return gulp;
+  return gulp.src(".");
 });
 
 gulp.task("tsc", function () {
