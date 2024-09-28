@@ -4,11 +4,14 @@ import dotenv from "dotenv";
 // import userRoutes from "./routes/user";
 // import documentRoutes from "./routes/document";
 import fs from "fs";
+import path from "path";
 
 dotenv.config({ path: fs.existsSync("./.env") ? "./.env" : "../.env" });
 
 const app: Application = express();
 app.use(express.json()); // For    parsing JSON bodies
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.all("*", (req, res) => {
   res.send(process.env);
@@ -19,7 +22,7 @@ app.all("*", (req, res) => {
 // app.use("/api/documents", documentRoutes);
 
 // // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 // mongoose
 //   .connect(process.env.MONGO_URI as string, {
 //     useNewUrlParser: true,
