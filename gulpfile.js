@@ -8,11 +8,7 @@ const run = require("gulp-run");
 
 gulp.task("clear", function () {
   if (fs.existsSync("dist")) {
-    return gulp
-      .src("dist/*", {
-        read: false,
-      })
-      .pipe(clean());
+    return gulp.src(".").pipe(run("rm -rf ./dist"));
   }
   return gulp.src(".");
 });
